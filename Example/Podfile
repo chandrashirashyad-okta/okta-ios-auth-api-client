@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'okta-ios-auth-api-client_Example', :exclusive => true do
+  pod "okta-ios-auth-api-client", :path => "../"
+end
+
+target 'okta-ios-auth-api-client_Tests', :exclusive => true do
+  pod "okta-ios-auth-api-client", :path => "../"
+
+  pod 'Kiwi'
+end
