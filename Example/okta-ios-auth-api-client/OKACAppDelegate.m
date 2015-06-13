@@ -7,12 +7,15 @@
 //
 
 #import "OKACAppDelegate.h"
+#import "AuthAPIClient.h"
 
 @implementation OKACAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    AuthAPIClient *ac = [[AuthAPIClient alloc] init];
+    [ac authenticate];
     return YES;
 }
 							

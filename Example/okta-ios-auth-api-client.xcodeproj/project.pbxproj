@@ -14,7 +14,6 @@
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
 		6003F59E195388D20070C39A /* OKACAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* OKACAppDelegate.m */; };
-		6003F5A7195388D20070C39A /* OKACViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* OKACViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -23,6 +22,11 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		65813DA8C91563E0E5F1C9D5 /* Pods_okta_ios_auth_api_client_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC2BE50911E050B2DDB2027 /* Pods_okta_ios_auth_api_client_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		9187AAD01B2CB34E00139D1A /* OktaMFAEnrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9187AAC61B2CB34E00139D1A /* OktaMFAEnrollViewController.m */; };
+		9187AAD11B2CB34E00139D1A /* OktaChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9187AAC91B2CB34E00139D1A /* OktaChangePasswordViewController.m */; };
+		9187AAD21B2CB34E00139D1A /* OktaPickerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 9187AACA1B2CB34E00139D1A /* OktaPickerTextField.m */; };
+		9187AAD31B2CB34E00139D1A /* OktaPickerTextFieldHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 9187AACC1B2CB34E00139D1A /* OktaPickerTextFieldHandler.m */; };
+		9187AAD41B2CB34E00139D1A /* OktaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9187AACF1B2CB34E00139D1A /* OktaViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +45,7 @@
 		3864F8865DA829EB6E0D2725 /* okta-ios-auth-api-client.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "okta-ios-auth-api-client.podspec"; path = "../okta-ios-auth-api-client.podspec"; sourceTree = "<group>"; };
 		50B3F169DCF20731B5200005 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		58BB898DB12E83F914A3D517 /* Pods-okta-ios-auth-api-client_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-okta-ios-auth-api-client_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-okta-ios-auth-api-client_Tests/Pods-okta-ios-auth-api-client_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		6003F58A195388D20070C39A /* okta-ios-auth-api-client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "okta-ios-auth-api-client.app"; path = "okta-ios-auth-api-client_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6003F58A195388D20070C39A /* okta-ios-auth-api-client_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "okta-ios-auth-api-client_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6003F591195388D20070C39A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -51,10 +55,8 @@
 		6003F59B195388D20070C39A /* okta-ios-auth-api-client-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "okta-ios-auth-api-client-Prefix.pch"; sourceTree = "<group>"; };
 		6003F59C195388D20070C39A /* OKACAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKACAppDelegate.h; sourceTree = "<group>"; };
 		6003F59D195388D20070C39A /* OKACAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OKACAppDelegate.m; sourceTree = "<group>"; };
-		6003F5A5195388D20070C39A /* OKACViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OKACViewController.h; sourceTree = "<group>"; };
-		6003F5A6195388D20070C39A /* OKACViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OKACViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		6003F5AE195388D20070C39A /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = Tests.xctest; path = "okta-ios-auth-api-client_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6003F5AE195388D20070C39A /* okta-ios-auth-api-client_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "okta-ios-auth-api-client_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -62,6 +64,17 @@
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		63A70A48F8ABF3197B968067 /* Pods-okta-ios-auth-api-client_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-okta-ios-auth-api-client_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-okta-ios-auth-api-client_Example/Pods-okta-ios-auth-api-client_Example.release.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		9187AAC51B2CB34E00139D1A /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		9187AAC61B2CB34E00139D1A /* OktaMFAEnrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OktaMFAEnrollViewController.m; sourceTree = "<group>"; };
+		9187AAC71B2CB34E00139D1A /* OktaMFAEnrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OktaMFAEnrollViewController.h; sourceTree = "<group>"; };
+		9187AAC81B2CB34E00139D1A /* OktaChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OktaChangePasswordViewController.h; sourceTree = "<group>"; };
+		9187AAC91B2CB34E00139D1A /* OktaChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OktaChangePasswordViewController.m; sourceTree = "<group>"; };
+		9187AACA1B2CB34E00139D1A /* OktaPickerTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OktaPickerTextField.m; sourceTree = "<group>"; };
+		9187AACB1B2CB34E00139D1A /* OktaPickerTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OktaPickerTextField.h; sourceTree = "<group>"; };
+		9187AACC1B2CB34E00139D1A /* OktaPickerTextFieldHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OktaPickerTextFieldHandler.m; sourceTree = "<group>"; };
+		9187AACD1B2CB34E00139D1A /* OktaPickerTextFieldHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OktaPickerTextFieldHandler.h; sourceTree = "<group>"; };
+		9187AACE1B2CB34E00139D1A /* OktaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OktaViewController.h; sourceTree = "<group>"; };
+		9187AACF1B2CB34E00139D1A /* OktaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OktaViewController.m; sourceTree = "<group>"; };
 		CAC2BE50911E050B2DDB2027 /* Pods_okta_ios_auth_api_client_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_okta_ios_auth_api_client_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDBC3B9AA42A8A405D2C28AD /* Pods-okta-ios-auth-api-client_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-okta-ios-auth-api-client_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-okta-ios-auth-api-client_Tests/Pods-okta-ios-auth-api-client_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		F22F3F096C34486FF0CBA5E1 /* Pods_okta_ios_auth_api_client_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_okta_ios_auth_api_client_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,8 +121,8 @@
 		6003F58B195388D20070C39A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6003F58A195388D20070C39A /* okta-ios-auth-api-client.app */,
-				6003F5AE195388D20070C39A /* Tests.xctest */,
+				6003F58A195388D20070C39A /* okta-ios-auth-api-client_Example.app */,
+				6003F5AE195388D20070C39A /* okta-ios-auth-api-client_Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,11 +143,20 @@
 		6003F593195388D20070C39A /* Example for okta-ios-auth-api-client */ = {
 			isa = PBXGroup;
 			children = (
+				9187AAC51B2CB34E00139D1A /* Constants.h */,
+				9187AAC61B2CB34E00139D1A /* OktaMFAEnrollViewController.m */,
+				9187AAC71B2CB34E00139D1A /* OktaMFAEnrollViewController.h */,
+				9187AAC81B2CB34E00139D1A /* OktaChangePasswordViewController.h */,
+				9187AAC91B2CB34E00139D1A /* OktaChangePasswordViewController.m */,
+				9187AACA1B2CB34E00139D1A /* OktaPickerTextField.m */,
+				9187AACB1B2CB34E00139D1A /* OktaPickerTextField.h */,
+				9187AACC1B2CB34E00139D1A /* OktaPickerTextFieldHandler.m */,
+				9187AACD1B2CB34E00139D1A /* OktaPickerTextFieldHandler.h */,
+				9187AACE1B2CB34E00139D1A /* OktaViewController.h */,
+				9187AACF1B2CB34E00139D1A /* OktaViewController.m */,
 				6003F59C195388D20070C39A /* OKACAppDelegate.h */,
 				6003F59D195388D20070C39A /* OKACAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
-				6003F5A5195388D20070C39A /* OKACViewController.h */,
-				6003F5A6195388D20070C39A /* OKACViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -213,7 +235,7 @@
 			);
 			name = "okta-ios-auth-api-client_Example";
 			productName = "okta-ios-auth-api-client";
-			productReference = 6003F58A195388D20070C39A /* okta-ios-auth-api-client.app */;
+			productReference = 6003F58A195388D20070C39A /* okta-ios-auth-api-client_Example.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6003F5AD195388D20070C39A /* okta-ios-auth-api-client_Tests */ = {
@@ -234,7 +256,7 @@
 			);
 			name = "okta-ios-auth-api-client_Tests";
 			productName = "okta-ios-auth-api-clientTests";
-			productReference = 6003F5AE195388D20070C39A /* Tests.xctest */;
+			productReference = 6003F5AE195388D20070C39A /* okta-ios-auth-api-client_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -390,9 +412,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9187AAD11B2CB34E00139D1A /* OktaChangePasswordViewController.m in Sources */,
+				9187AAD21B2CB34E00139D1A /* OktaPickerTextField.m in Sources */,
 				6003F59E195388D20070C39A /* OKACAppDelegate.m in Sources */,
-				6003F5A7195388D20070C39A /* OKACViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				9187AAD01B2CB34E00139D1A /* OktaMFAEnrollViewController.m in Sources */,
+				9187AAD31B2CB34E00139D1A /* OktaPickerTextFieldHandler.m in Sources */,
+				9187AAD41B2CB34E00139D1A /* OktaViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,7 +492,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -499,7 +525,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -515,8 +541,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "okta-ios-auth-api-client/okta-ios-auth-api-client-Prefix.pch";
 				INFOPLIST_FILE = "okta-ios-auth-api-client/okta-ios-auth-api-client-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = mh_execute;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -530,8 +559,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "okta-ios-auth-api-client/okta-ios-auth-api-client-Prefix.pch";
 				INFOPLIST_FILE = "okta-ios-auth-api-client/okta-ios-auth-api-client-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = mh_execute;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
