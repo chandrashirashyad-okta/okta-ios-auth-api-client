@@ -11,7 +11,8 @@
 #import "Models.h"
 
 //static NSString * const kBaseURL = @"https://chandra.okta1.com:80/api/v1/";
-static NSString * const kBaseURL = @"http://rain.okta1.com:1802/api/v1/";
+//static NSString * const kBaseURL = @"http://rain.okta1.com:1802/api/v1/";
+static NSString * const kBaseURL = @"https://shirashyad.oktapreview.com/api/v1/";
 
 @interface AuthAPIClient : NSObject 
 
