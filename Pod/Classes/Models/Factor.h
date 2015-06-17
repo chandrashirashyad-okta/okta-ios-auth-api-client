@@ -19,7 +19,7 @@
 @property (strong, nonatomic) NSString* factorId;
 @property (strong, nonatomic) NSString* factorType;
 @property (strong, nonatomic) NSString* provider;
-//@property (strong, nonatomic) FactorProfile* profile;  //Attempt to dynamicly map Factor Profile later.
+@property (strong, nonatomic) FactorProfile* profile;  //Attempt to dynamicly map Factor Profile later.
 @property (strong, nonatomic) QuestionFactorProfile* questionFactorProfile;
 @property (strong, nonatomic) SMSFactorProfile* smsFactorProfile;
 @property (strong, nonatomic) TOTPFactorProfile* totpFactorProfile;

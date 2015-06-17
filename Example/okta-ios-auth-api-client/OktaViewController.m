@@ -92,21 +92,21 @@
     for (Factor *fact in self.auth.factors) {
         if ([fact.factorType isEqualToString:@"sms"]) {
             AuthAPIClient *authClient = [[AuthAPIClient alloc] init];
-//            [authClient verifySMSFactor:fact.verify.href
-//                               stateToken:self.auth.stateToken
-//                                 passCode:@""
-//                                  success:^(Authentication *auth) {
-//                                      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pass Code Sent"
-//                                                                                      message:@"An SMS message has been sent to your phone. Please check and enter below."
-//                                                                                     delegate:self
-//                                                                            cancelButtonTitle:@"Close"
-//                                                                            otherButtonTitles:nil, nil];
-//                                      [alert show];
-//                                      self.auth = auth;
-//                                      [self processAuthentication];
-//                                  } failure:^(NSError *error) {
-//                                      self.APIResults.text = [error description];
-//                                  }];
+            [authClient verifySMSFactor:fact.verify.href
+                               stateToken:self.auth.stateToken
+                                 passCode:@""
+                                  success:^(Authentication *auth) {
+                                      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pass Code Sent"
+                                                                                      message:@"An SMS message has been sent to your phone. Please check and enter below."
+                                                                                     delegate:self
+                                                                            cancelButtonTitle:@"Close"
+                                                                            otherButtonTitles:nil, nil];
+                                      [alert show];
+                                      self.auth = auth;
+                                      [self processAuthentication];
+                                  } failure:^(NSError *error) {
+                                      self.APIResults.text = [error description];
+                                  }];
         }
     }
 }
@@ -116,16 +116,16 @@
         for (Factor *fact in self.auth.factors) {
             if ([fact.factorType isEqualToString:@"question"]) {
                 AuthAPIClient *authClient = [[AuthAPIClient alloc] init];
-//                [authClient verifyQuestionFactor:fact.factorId
-//                                      stateToken:self.auth.stateToken
-//                                          answer:self.mfaText.text
-//                                       verifyUrl:fact.verify.href
-//                                         success:^(Authentication *auth) {
-//                    self.auth = auth;
-//                    [self processAuthentication];
-//                } failure:^(NSError *error) {
-//                    self.APIResults.text = [error description];
-//                }];
+                [authClient verifyQuestionFactor:fact.factorId
+                                      stateToken:self.auth.stateToken
+                                          answer:self.mfaText.text
+                                       verifyUrl:fact.verify.href
+                                         success:^(Authentication *auth) {
+                    self.auth = auth;
+                    [self processAuthentication];
+                } failure:^(NSError *error) {
+                    self.APIResults.text = [error description];
+                }];
             }
         }
     }
@@ -133,29 +133,29 @@
         for (Factor *fact in self.auth.factors) {
             if ([fact.factorType isEqualToString:@"token:software:totp"]) {
                 AuthAPIClient *authClient = [[AuthAPIClient alloc] init];
-//                [authClient verifyTokenFactor:fact.verify.href
-//                                   stateToken:self.auth.stateToken
-//                                     passCode:self.mfaText.text
-//                                      success:^(Authentication *auth) {
-//                                          self.auth = auth;
-//                                          [self processAuthentication];
-//                                      } failure:^(NSError *error) {
-//                                          self.APIResults.text = [error description];
-//                                      }];
+                [authClient verifyTokenFactor:fact.verify.href
+                                   stateToken:self.auth.stateToken
+                                     passCode:self.mfaText.text
+                                      success:^(Authentication *auth) {
+                                          self.auth = auth;
+                                          [self processAuthentication];
+                                      } failure:^(NSError *error) {
+                                          self.APIResults.text = [error description];
+                                      }];
             }
         }
     }
     else if ([self.auth.status isEqualToString:@"MFA_CHALLENGE"]) {  //SMS Challenge Response
         AuthAPIClient *authClient = [[AuthAPIClient alloc] init];
-//        [authClient verifySMSFactor:self.auth.next.href
-//                         stateToken:self.auth.stateToken
-//                           passCode:self.mfaText.text
-//                            success:^(Authentication *auth) {
-//                                self.auth = auth;
-//                                [self processAuthentication];
-//                            } failure:^(NSError *error) {
-//                                self.APIResults.text = [error description];
-//                            }];
+        [authClient verifySMSFactor:self.auth.next.href
+                         stateToken:self.auth.stateToken
+                           passCode:self.mfaText.text
+                            success:^(Authentication *auth) {
+                                self.auth = auth;
+                                [self processAuthentication];
+                            } failure:^(NSError *error) {
+                                self.APIResults.text = [error description];
+                            }];
     }
     self.mfaView.hidden = YES;
 }

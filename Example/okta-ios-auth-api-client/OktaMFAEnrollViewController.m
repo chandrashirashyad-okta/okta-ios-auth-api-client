@@ -57,17 +57,17 @@
 
 - (IBAction)activateTokenButtonClicked:(id)sender {
     AuthAPIClient *authClient = [[AuthAPIClient alloc] init];
-//    [authClient verifyTokenFactor:self.auth.next.href
-//                       stateToken:self.auth.stateToken
-//                         passCode:enterTokenField.text
-//                          success:^(Authentication *auth) {
-//                              NSLog(@"Activation Success!");
-//                              self.auth = auth;
-//                              [self handleAuthSuccess:auth];
-//                          } failure:^(NSError *error) {
-//                              NSLog(@"%@", [error description]);
-//                              APIResults.text = [error description];
-//                          }];
+    [authClient verifyTokenFactor:self.auth.next.href
+                       stateToken:self.auth.stateToken
+                         passCode:enterTokenField.text
+                          success:^(Authentication *auth) {
+                              NSLog(@"Activation Success!");
+                              self.auth = auth;
+                              [self handleAuthSuccess:auth];
+                          } failure:^(NSError *error) {
+                              NSLog(@"%@", [error description]);
+                              APIResults.text = [error description];
+                          }];
 }
 
 - (IBAction)smsButtonClicked:(id)sender {
@@ -75,33 +75,33 @@
         NSString *phone = smsField.text;
         Factor *fact = [self getFactor:@"sms"];
         AuthAPIClient *authClient = [[AuthAPIClient alloc] init];
-//        [authClient enrollSMSFactor:fact.factorType
-//                         stateToken:self.auth.stateToken
-//                           provider:fact.provider
-//                        phoneNumber:phone
-//                          enrollUrl:fact.enroll.href
-//                            success:^(Authentication *auth) {
-//                                NSLog(@"Enrollment Success!");
-//                                self.auth = auth;
-//                                [self handleAuthSuccess:auth];
-//                                [self showActivateSms];
-//                            } failure:^(NSError *error) {
-//                                NSLog(@"%@", [error description]);
-//                                APIResults.text = [error description];
-//                            }];
+        [authClient enrollSMSFactor:fact.factorType
+                         stateToken:self.auth.stateToken
+                           provider:fact.provider
+                        phoneNumber:phone
+                          enrollUrl:fact.enroll.href
+                            success:^(Authentication *auth) {
+                                NSLog(@"Enrollment Success!");
+                                self.auth = auth;
+                                [self handleAuthSuccess:auth];
+                                [self showActivateSms];
+                            } failure:^(NSError *error) {
+                                NSLog(@"%@", [error description]);
+                                APIResults.text = [error description];
+                            }];
     } else if ([smsLabel.text containsString:@"Verification code"]){
         AuthAPIClient *authClient = [[AuthAPIClient alloc] init];
-//        [authClient verifySMSFactor:self.auth.next.href
-//                         stateToken:self.auth.stateToken
-//                           passCode:smsField.text
-//                            success:^(Authentication *auth) {
-//                                NSLog(@"Activation Success!");
-//                                self.auth = auth;
-//                                [self handleAuthSuccess:auth];
-//                            } failure:^(NSError *error) {
-//                                NSLog(@"%@", [error description]);
-//                                APIResults.text = [error description];
-//                            }];
+        [authClient verifySMSFactor:self.auth.next.href
+                         stateToken:self.auth.stateToken
+                           passCode:smsField.text
+                            success:^(Authentication *auth) {
+                                NSLog(@"Activation Success!");
+                                self.auth = auth;
+                                [self handleAuthSuccess:auth];
+                            } failure:^(NSError *error) {
+                                NSLog(@"%@", [error description]);
+                                APIResults.text = [error description];
+                            }];
     }
 }
 

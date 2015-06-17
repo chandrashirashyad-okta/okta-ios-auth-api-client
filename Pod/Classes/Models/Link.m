@@ -12,7 +12,7 @@
 
 + (NSDictionary*)JSONKeyPathsByPropertyKey {
     return @{@"href":@"href",
-             @"templated":@"templated",
+//             @"templated":@"templated",
              @"type":@"type",
              @"deprecation":@"deprecation",
              @"name":@"name",

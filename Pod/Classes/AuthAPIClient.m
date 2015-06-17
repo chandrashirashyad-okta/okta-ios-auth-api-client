@@ -49,7 +49,9 @@
                              };
     [manager POST:@"authn" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *dict = (NSDictionary *) responseObject;
+//        NSLog(@"%@", dict);
         NSError *error = [[NSError alloc] init];
+
         Authentication *auth = [MTLJSONAdapter modelOfClass:Authentication.class fromJSONDictionary:dict error:&error];
         if (error == nil)
         {

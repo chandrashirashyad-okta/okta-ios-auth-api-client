@@ -13,7 +13,7 @@
 @interface Link : MTLModel <MTLJSONSerializing>
 
 @property (strong, nonatomic) NSString *href;
-@property BOOL *templated;
+//@property BOOL *templated;
 @property (strong, nonatomic) NSString *type;
 @property (strong, nonatomic) NSString *deprecation;
 @property (strong, nonatomic) NSString *name;
