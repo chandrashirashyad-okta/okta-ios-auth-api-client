@@ -132,38 +132,38 @@
             break;
         }
     }
-//    [authClient enrollQuestionFactor:fact.factorType
-//                          stateToken:self.auth.stateToken
-//                            provider:fact.provider
-//                             profile:profile
-//                           enrollUrl: fact.enroll.href
-//                             success:^(Authentication *auth) {
-//                                 NSLog(@"Enrollment Success!");
-//                                 self.auth = auth;
-//                                 [self handleAuthSuccess:auth];
-//                             }
-//                             failure:^(NSError *error) {
-//                                 NSLog(@"%@", [error description]);
-//                                 APIResults.text = [error description];
-//                             }];
+    [authClient enrollQuestionFactor:fact.factorType
+                          stateToken:self.auth.stateToken
+                            provider:fact.provider
+                             profile:profile
+                           enrollUrl: fact.enroll.href
+                             success:^(Authentication *auth) {
+                                 NSLog(@"Enrollment Success!");
+                                 self.auth = auth;
+                                 [self handleAuthSuccess:auth];
+                             }
+                             failure:^(NSError *error) {
+                                 NSLog(@"%@", [error description]);
+                                 APIResults.text = [error description];
+                             }];
 }
 
 - (void)submitToken:(Factor *)fact {
     AuthAPIClient *authClient = [[AuthAPIClient alloc] init];
-//    [authClient enrollTokenFactor:fact.factorType
-//                       stateToken:self.auth.stateToken
-//                         provider:fact.provider
-//                        enrollUrl:fact.enroll.href
-//                          success:^(Authentication *auth) {
-//                              NSLog(@"Enrollment Success!");
-//                              self.auth = auth;
-//                              [self handleAuthSuccess:auth];
-//                              [self showActivationView];
-//                          }
-//                          failure:^(NSError *error) {
-//                              NSLog(@"%@", [error description]);
-//                              APIResults.text = [error description];
-//                          }];
+    [authClient enrollTokenFactor:fact.factorType
+                       stateToken:self.auth.stateToken
+                         provider:fact.provider
+                        enrollUrl:fact.enroll.href
+                          success:^(Authentication *auth) {
+                              NSLog(@"Enrollment Success!");
+                              self.auth = auth;
+                              [self handleAuthSuccess:auth];
+                              [self showActivationView];
+                          }
+                          failure:^(NSError *error) {
+                              NSLog(@"%@", [error description]);
+                              APIResults.text = [error description];
+                          }];
 }
 
 - (void)submitSms:(Factor *)fact {
@@ -209,18 +209,18 @@
         if ([fact.factorType isEqualToString:@"question"]) {
             // Get questions and display
             AuthAPIClient *authClient = [[AuthAPIClient alloc] init];
-//            [authClient getQuestionsList:fact.questions.href success:^(NSArray *questions) {
-//                selectQuestionView.hidden = NO;
-//                self.questionProfiles = questions;
-//                [self populateQuestionPicker:questions];
-//                NSLog(@"%@", questions);
-//            } failure:^(NSError *error) {
-//                NSLog(@"%@", error.description);
-//            }];
+            [authClient getQuestionsList:fact.questions.href success:^(NSArray *questions) {
+                selectQuestionView.hidden = NO;
+                self.questionProfiles = questions;
+                [self populateQuestionPicker:questions];
+                NSLog(@"%@", questions);
+            } failure:^(NSError *error) {
+                NSLog(@"%@", error.description);
+            }];
             return;
         }
     }
-    
+
     NSLog(@"Error: self.auth.factors array doesn't contain the selected MFA method");
 }
 

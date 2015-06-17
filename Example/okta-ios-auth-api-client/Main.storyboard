@@ -28,8 +28,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SC8-uY-WK0">
-                                <rect key="frame" x="63" y="54" width="193" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="chandra.shirashyad" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SC8-uY-WK0">
+                                <rect key="frame" x="64" y="84" width="193" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -37,7 +37,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1t3-mM-Pq7">
-                                <rect key="frame" x="63" y="100" width="193" height="30"/>
+                                <rect key="frame" x="63" y="120" width="193" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
@@ -45,7 +45,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIe-pX-9QZ">
-                                <rect key="frame" x="114" y="138" width="91" height="30"/>
+                                <rect key="frame" x="114" y="146" width="91" height="30"/>
                                 <state key="normal" title="Login">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -102,6 +102,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="https://shirashyad.oktapreview.com" borderStyle="roundedRect" placeholder="Organization" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="55Z-h1-GFm">
+                                <rect key="frame" x="63" y="48" width="194" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -110,6 +115,7 @@
                         <outlet property="mfaFactorTypeText" destination="J3t-tB-xtQ" id="lku-5n-rCD"/>
                         <outlet property="mfaText" destination="6fy-oU-d0w" id="QhW-al-433"/>
                         <outlet property="mfaView" destination="28O-42-UzN" id="kKQ-Ms-gcC"/>
+                        <outlet property="organization" destination="55Z-h1-GFm" id="z7e-nh-SvV"/>
                         <outlet property="password" destination="1t3-mM-Pq7" id="0vl-nz-24C"/>
                         <outlet property="questionText" destination="Ubo-UB-Rhm" id="8Gn-2j-vcH"/>
                         <outlet property="sendSMSButton" destination="r77-1P-jOu" id="DZh-Qx-T2r"/>

@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet OktaPickerTextField *mfaFactorTypeText;
 @property (weak, nonatomic) IBOutlet UILabel *questionText;
 @property (weak, nonatomic) IBOutlet UIButton *sendSMSButton;
+@property (weak, nonatomic) IBOutlet UITextField *organization;
 
 @property (strong, nonatomic) NSMutableArray* pickerData;
 @property (strong, nonatomic) Authentication* auth;
@@ -27,7 +28,7 @@
 @implementation OktaViewController
 
 - (IBAction)doAuthenticate:(id)sender {
-    AuthAPIClient *doAuth = [[AuthAPIClient alloc] init];
+    AuthAPIClient *doAuth = [[AuthAPIClient alloc] initWithOrgUrl:self.organization.text];
     [doAuth authenticate:self.username.text
                 password:self.password.text
                  success:^(Authentication *auth) {
@@ -91,7 +92,7 @@
 - (IBAction)SendSMS:(id)sender {
     for (Factor *fact in self.auth.factors) {
         if ([fact.factorType isEqualToString:@"sms"]) {
-            AuthAPIClient *authClient = [[AuthAPIClient alloc] init];
+            AuthAPIClient *authClient = [[AuthAPIClient alloc] initWithOrgUrl:self.organization.text];
             [authClient verifySMSFactor:fact.verify.href
                                stateToken:self.auth.stateToken
                                  passCode:@""
@@ -115,7 +116,7 @@
     if ([self.mfaFactorTypeText.text  isEqual: @"OKTA-question"]) {
         for (Factor *fact in self.auth.factors) {
             if ([fact.factorType isEqualToString:@"question"]) {
-                AuthAPIClient *authClient = [[AuthAPIClient alloc] init];
+                AuthAPIClient *authClient = [[AuthAPIClient alloc] initWithOrgUrl:self.organization.text];
                 [authClient verifyQuestionFactor:fact.factorId
                                       stateToken:self.auth.stateToken
                                           answer:self.mfaText.text
@@ -132,7 +133,7 @@
     else if ([self.mfaFactorTypeText.text containsString:@"token:software:totp"]) {
         for (Factor *fact in self.auth.factors) {
             if ([fact.factorType isEqualToString:@"token:software:totp"]) {
-                AuthAPIClient *authClient = [[AuthAPIClient alloc] init];
+                AuthAPIClient *authClient = [[AuthAPIClient alloc] initWithOrgUrl:self.organization.text];
                 [authClient verifyTokenFactor:fact.verify.href
                                    stateToken:self.auth.stateToken
                                      passCode:self.mfaText.text
@@ -146,7 +147,7 @@
         }
     }
     else if ([self.auth.status isEqualToString:@"MFA_CHALLENGE"]) {  //SMS Challenge Response
-        AuthAPIClient *authClient = [[AuthAPIClient alloc] init];
+        AuthAPIClient *authClient = [[AuthAPIClient alloc] initWithOrgUrl:self.organization.text];
         [authClient verifySMSFactor:self.auth.next.href
                          stateToken:self.auth.stateToken
                            passCode:self.mfaText.text

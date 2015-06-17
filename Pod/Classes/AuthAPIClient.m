@@ -16,12 +16,33 @@
 
 @implementation AuthAPIClient
 
+- (id)initWithOrgUrl:(NSString *)url {
+    if ( self = [super init] ) {
+        if ([url length] == 0) {
+            self.kBaseURL = defaultBaseURL;
+        }
+        else {
+            self.kBaseURL = [NSString stringWithFormat:@"%@/api/v1", url];
+        }
+        return self;
+    }
+    return nil;
+}
+
+- (id)init {
+    if ( self = [super init] ) {
+        self.kBaseURL = defaultBaseURL;
+        return self;
+    }
+    return nil;
+}
+
 - (NSDictionary *)authenticate {
     NSDictionary *params = @{ @"username": @"Administrator1",
                               @"password": @"Abcd1234"
                               };
 
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
 
@@ -40,7 +61,7 @@
              success:(void (^)(Authentication *auth))success
              failure:(void (^)(NSError *error))failure {
     
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
 
@@ -72,7 +93,7 @@
                      success:(void (^)(Authentication *auth))success
                      failure:(void (^)(NSError *error))failure {
     
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
@@ -103,7 +124,7 @@
                 success:(void (^)(Authentication *auth))success
                 failure:(void (^)(NSError *error))failure {
 
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
@@ -133,7 +154,7 @@
                   success:(void (^)(Authentication *auth))success
                   failure:(void (^)(NSError *error))failure {
 
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
@@ -164,7 +185,7 @@
                       success:(void (^)(Authentication *auth))success
                       failure:(void (^)(NSError *error))failure {
 
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
@@ -196,7 +217,7 @@
                      success:(void (^)(Authentication *auth))success
                      failure:(void (^)(NSError *error))failure {
 
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
@@ -229,7 +250,7 @@
                 success:(void (^)(Authentication *auth))success
                 failure:(void (^)(NSError *error))failure {
 
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
@@ -261,7 +282,7 @@
                   success:(void (^)(Authentication *auth))success
                   failure:(void (^)(NSError *error)) failure {
 
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
@@ -289,7 +310,7 @@
                  success:(void (^)(NSArray *questions))success
                  failure:(void (^)(NSError *error))failure {
 
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
@@ -308,7 +329,7 @@
                     success:(void (^)(Authentication *auth))success
                     failure:(void (^)(NSError *error))failure {
     
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
@@ -339,7 +360,7 @@
                   success:(void (^)(Authentication *auth))success
                   failure:(void (^)(NSError *error))failure {
     
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
@@ -368,7 +389,7 @@
                success:(void (^)(Authentication *auth))success
                failure:(void (^)(NSError *error))failure {
     
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
@@ -396,7 +417,7 @@
               success:(void (^)(Authentication *auth))success
               failure:(void (^)(NSError *error))failure {
 
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
@@ -424,7 +445,7 @@
                     success:(void (^)(Authentication *auth))success
                     failure:(void (^)(NSError *error))failure {
     
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
@@ -452,7 +473,7 @@
                     success:(void (^)(Authentication *auth))success
                     failure:(void (^)(NSError *error))failure {
     
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
@@ -481,7 +502,7 @@
               success:(void (^)(Authentication *auth))success
               failure:(void (^)(NSError *error))failure {
 
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
 
@@ -507,7 +528,7 @@
 - (void)getSessionSuccess:(void (^)(OKSession *session))success
                   failure:(void (^)(NSError *error))failure {
 
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kBaseURL]];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
 
