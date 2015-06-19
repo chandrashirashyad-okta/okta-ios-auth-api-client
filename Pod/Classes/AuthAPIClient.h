@@ -22,7 +22,7 @@ static NSString * const defaultBaseURL = @"https://shirashyad.oktapreview.com/ap
 
 - (id)initWithOrgUrl:(NSString *)url;
 
-- (NSDictionary *) authenticate;
+- (NSDictionary *) authenticateTest;
 
 - (void)authenticate:(NSString *)username
             password:(NSString *)password

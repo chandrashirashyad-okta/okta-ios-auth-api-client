@@ -37,7 +37,7 @@
     return nil;
 }
 
-- (NSDictionary *)authenticate {
+- (NSDictionary *)authenticateTest {
     NSDictionary *params = @{ @"username": @"Administrator1",
                               @"password": @"Abcd1234"
                               };
@@ -56,23 +56,20 @@
     return self.auth;
 }
 
-- (void)authenticate:(NSString *)username
-            password:(NSString *)password
-             success:(void (^)(Authentication *auth))success
-             failure:(void (^)(NSError *error))failure {
-    
+- (void)httpPostForAuthentication: (NSString *) uri
+    params: (NSDictionary *) params
+   success:(void (^)(Authentication *auth))success
+   failure:(void (^)(NSError *error))failure {
+
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-
-    NSDictionary *params = @{@"username": username,
-                             @"password": password
-                             };
-    [manager POST:@"authn" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+    
+    [manager POST:uri parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *dict = (NSDictionary *) responseObject;
-//        NSLog(@"%@", dict);
+        NSLog(@"%@", dict);
         NSError *error = [[NSError alloc] init];
-
+        
         Authentication *auth = [MTLJSONAdapter modelOfClass:Authentication.class fromJSONDictionary:dict error:&error];
         if (error == nil)
         {
@@ -84,6 +81,18 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         failure(error);
     }];
+}
+
+- (void)authenticate:(NSString *)username
+            password:(NSString *)password
+             success:(void (^)(Authentication *auth))success
+             failure:(void (^)(NSError *error))failure {
+    
+    NSDictionary *params = @{@"username": username,
+                             @"password": password
+                             };
+    [self httpPostForAuthentication:@"authn" params:params success:success failure:failure];
+
 }
 
 - (void)verifyQuestionFactor:(NSString *)fid
@@ -93,29 +102,13 @@
                      success:(void (^)(Authentication *auth))success
                      failure:(void (^)(NSError *error))failure {
     
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
     NSDictionary *params = @{@"fid": fid,
                              @"stateToken": stateToken,
                              @"answer": answer,
                              @"verifyUrl": verifyUrl
                              };
-    [manager POST:verifyUrl parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *dict = (NSDictionary *) responseObject;
-        NSError *error = [[NSError alloc] init];
-        Authentication *auth = [MTLJSONAdapter modelOfClass:Authentication.class fromJSONDictionary:dict error:&error];
-        if (error == nil)
-        {
-            success(auth);
-        }
-        else {
-            failure(error);
-        }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        failure(error);
-    }];
+    [self httpPostForAuthentication:verifyUrl params:params success:success failure:failure];
+
 }
 
 - (void)verifySMSFactor:(NSString *)fid
@@ -124,28 +117,13 @@
                 success:(void (^)(Authentication *auth))success
                 failure:(void (^)(NSError *error))failure {
 
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
     NSDictionary *params = @{@"fid": fid,
                              @"stateToken": stateToken,
                              @"passcode": passCode
                              };
-    [manager POST:fid parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *dict = (NSDictionary *) responseObject;
-        NSError *error = [[NSError alloc] init];
-        Authentication *auth = [MTLJSONAdapter modelOfClass:Authentication.class fromJSONDictionary:dict error:&error];
-        if (error == nil)
-        {
-            success(auth);
-        }
-        else {
-            failure(error);
-        }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        failure(error);
-    }];
+
+    [self httpPostForAuthentication:fid params:params success:success failure:failure];
+
 }
 
 - (void)verifyTokenFactor:(NSString *)fid
@@ -154,28 +132,13 @@
                   success:(void (^)(Authentication *auth))success
                   failure:(void (^)(NSError *error))failure {
 
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
     NSDictionary *params = @{@"fid": fid,
                              @"stateToken": stateToken,
                              @"passcode": passCode
                              };
-    [manager POST:fid parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *dict = (NSDictionary *) responseObject;
-        NSError *error = [[NSError alloc] init];
-        Authentication *auth = [MTLJSONAdapter modelOfClass:Authentication.class fromJSONDictionary:dict error:&error];
-        if (error == nil)
-        {
-            success(auth);
-        }
-        else {
-            failure(error);
-        }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        failure(error);
-    }];
+
+    [self httpPostForAuthentication:fid params:params success:success failure:failure];
+
 }
 
 - (void)changeExpiredPassword:(NSString *)stateToken
@@ -185,28 +148,13 @@
                       success:(void (^)(Authentication *auth))success
                       failure:(void (^)(NSError *error))failure {
 
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
     NSDictionary *params = @{@"oldPassword": oldPassword,
                              @"stateToken": stateToken,
                              @"nuevoPassword": nuevoPassword
                              };
-    [manager POST:nextUrl parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *dict = (NSDictionary *) responseObject;
-        NSError *error = [[NSError alloc] init];
-        Authentication *auth = [MTLJSONAdapter modelOfClass:Authentication.class fromJSONDictionary:dict error:&error];
-        if (error == nil)
-        {
-            success(auth);
-        }
-        else {
-            failure(error);
-        }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        failure(error);
-    }];
+
+    [self httpPostForAuthentication:nextUrl params:params success:success failure:failure];
+
 }
 
 - (void)enrollQuestionFactor:(NSString *)factorType
@@ -217,29 +165,14 @@
                      success:(void (^)(Authentication *auth))success
                      failure:(void (^)(NSError *error))failure {
 
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
     NSDictionary *params = @{@"factorType": factorType,
                              @"stateToken": stateToken,
                              @"provider": provider,
                              @"profile": profile
                              };
-    [manager POST:enrollUrl parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *dict = (NSDictionary *) responseObject;
-        NSError *error = [[NSError alloc] init];
-        Authentication *auth = [MTLJSONAdapter modelOfClass:Authentication.class fromJSONDictionary:dict error:&error];
-        if (error == nil)
-        {
-            success(auth);
-        }
-        else {
-            failure(error);
-        }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        failure(error);
-    }];
+
+    [self httpPostForAuthentication:enrollUrl params:params success:success failure:failure];
+
 }
 
 - (void)enrollSMSFactor:(NSString *)factorType
@@ -250,29 +183,14 @@
                 success:(void (^)(Authentication *auth))success
                 failure:(void (^)(NSError *error))failure {
 
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
     NSDictionary *params = @{@"factorType": factorType,
                              @"stateToken": stateToken,
                              @"provider": provider,
                              @"phoneNumber": phoneNumber
                              };
-    [manager POST:enrollUrl parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *dict = (NSDictionary *) responseObject;
-        NSError *error = [[NSError alloc] init];
-        Authentication *auth = [MTLJSONAdapter modelOfClass:Authentication.class fromJSONDictionary:dict error:&error];
-        if (error == nil)
-        {
-            success(auth);
-        }
-        else {
-            failure(error);
-        }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        failure(error);
-    }];
+
+    [self httpPostForAuthentication:enrollUrl params:params success:success failure:failure];
+
 }
 
 - (void)enrollTokenFactor:(NSString *)factorType
@@ -282,28 +200,13 @@
                   success:(void (^)(Authentication *auth))success
                   failure:(void (^)(NSError *error)) failure {
 
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
     NSDictionary *params = @{@"factorType": factorType,
                              @"stateToken": stateToken,
                              @"provider": provider
                              };
-    [manager POST:enrollUrl parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *dict = (NSDictionary *) responseObject;
-        NSError *error = [[NSError alloc] init];
-        Authentication *auth = [MTLJSONAdapter modelOfClass:Authentication.class fromJSONDictionary:dict error:&error];
-        if (error == nil)
-        {
-            success(auth);
-        }
-        else {
-            failure(error);
-        }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        failure(error);
-    }];
+
+    [self httpPostForAuthentication:enrollUrl params:params success:success failure:failure];
+
 }
 
 - (void)getQuestionsList:(NSString *)questionsUrl
@@ -329,28 +232,13 @@
                     success:(void (^)(Authentication *auth))success
                     failure:(void (^)(NSError *error))failure {
     
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
     NSDictionary *params = @{@"fid": fid,
                              @"stateToken": stateToken,
                              @"passCode": passCode
                              };
-    [manager POST:activateUrl parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *dict = (NSDictionary *) responseObject;
-        NSError *error = [[NSError alloc] init];
-        Authentication *auth = [MTLJSONAdapter modelOfClass:Authentication.class fromJSONDictionary:dict error:&error];
-        if (error == nil)
-        {
-            success(auth);
-        }
-        else {
-            failure(error);
-        }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        failure(error);
-    }];
+
+    [self httpPostForAuthentication:activateUrl params:params success:success failure:failure];
+
 }
 
 - (void)activateSMSFactor:(NSString *)fid
@@ -360,56 +248,26 @@
                   success:(void (^)(Authentication *auth))success
                   failure:(void (^)(NSError *error))failure {
     
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
     NSDictionary *params = @{@"fid": fid,
                              @"stateToken": stateToken,
                              @"passCode": passCode
                              };
-    [manager POST:activateUrl parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *dict = (NSDictionary *) responseObject;
-        NSError *error = [[NSError alloc] init];
-        Authentication *auth = [MTLJSONAdapter modelOfClass:Authentication.class fromJSONDictionary:dict error:&error];
-        if (error == nil)
-        {
-            success(auth);
-        }
-        else {
-            failure(error);
-        }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        failure(error);
-    }];
+
+    [self httpPostForAuthentication:activateUrl params:params success:success failure:failure];
+
 }
 
 - (void)forgotPassword:(NSString *)username
             relayState:(NSString *)relayState
                success:(void (^)(Authentication *auth))success
                failure:(void (^)(NSError *error))failure {
-    
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
+
     NSDictionary *params = @{@"username": username,
                              @"relayState": relayState
                              };
-    [manager POST:OK_FORGOT_PASSWORD_URI parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *dict = (NSDictionary *) responseObject;
-        NSError *error = [[NSError alloc] init];
-        Authentication *auth = [MTLJSONAdapter modelOfClass:Authentication.class fromJSONDictionary:dict error:&error];
-        if (error == nil)
-        {
-            success(auth);
-        }
-        else {
-            failure(error);
-        }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        failure(error);
-    }];
+
+    [self httpPostForAuthentication:OK_FORGOT_PASSWORD_URI params:params success:success failure:failure];
+
 }
 
 - (void)unlockAccount:(NSString *)username
@@ -417,54 +275,24 @@
               success:(void (^)(Authentication *auth))success
               failure:(void (^)(NSError *error))failure {
 
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
     NSDictionary *params = @{@"username": username,
                              @"relayState": relayState
                              };
-    [manager POST:OK_UNLOCK_ACCOUNT_URI parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *dict = (NSDictionary *) responseObject;
-        NSError *error = [[NSError alloc] init];
-        Authentication *auth = [MTLJSONAdapter modelOfClass:Authentication.class fromJSONDictionary:dict error:&error];
-        if (error == nil)
-        {
-            success(auth);
-        }
-        else {
-            failure(error);
-        }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        failure(error);
-    }];
+
+    [self httpPostForAuthentication:OK_UNLOCK_ACCOUNT_URI params:params success:success failure:failure];
+    
 }
 
 - (void)verifyRecoveryToken:(NSString *)recoveryToken
                 recoveryUrl:(NSString *)recoveryUrl
                     success:(void (^)(Authentication *auth))success
                     failure:(void (^)(NSError *error))failure {
-    
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
+
     NSDictionary *params = @{@"recoveryToken": recoveryToken
                              };
-    [manager POST:OK_FORGOT_PASSWORD_URI parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *dict = (NSDictionary *) responseObject;
-        NSError *error = [[NSError alloc] init];
-        Authentication *auth = [MTLJSONAdapter modelOfClass:Authentication.class fromJSONDictionary:dict error:&error];
-        if (error == nil)
-        {
-            success(auth);
-        }
-        else {
-            failure(error);
-        }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        failure(error);
-    }];
+
+    [self httpPostForAuthentication:OK_FORGOT_PASSWORD_URI params:params success:success failure:failure];
+
 }
 
 - (void)answerRecoveryToken:(NSString *)stateToken
@@ -472,28 +300,13 @@
                   answerUrl:(NSString *)answerUrl
                     success:(void (^)(Authentication *auth))success
                     failure:(void (^)(NSError *error))failure {
-    
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
+
     NSDictionary *params = @{@"stateToken": stateToken,
                              @"answer": answer
                              };
-    [manager POST:answerUrl parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *dict = (NSDictionary *) responseObject;
-        NSError *error = [[NSError alloc] init];
-        Authentication *auth = [MTLJSONAdapter modelOfClass:Authentication.class fromJSONDictionary:dict error:&error];
-        if (error == nil)
-        {
-            success(auth);
-        }
-        else {
-            failure(error);
-        }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        failure(error);
-    }];
+
+    [self httpPostForAuthentication:answerUrl params:params success:success failure:failure];
+
 }
 
 - (void)resetPassword:(NSString *)stateToken
@@ -502,27 +315,12 @@
               success:(void (^)(Authentication *auth))success
               failure:(void (^)(NSError *error))failure {
 
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.kBaseURL]];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-
     NSDictionary *params = @{@"stateToken": stateToken,
                              @"nuevoPassword": nuevoPassword
                              };
-    [manager POST:resetPasswordUrl parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *dict = (NSDictionary *) responseObject;
-        NSError *error = [[NSError alloc] init];
-        Authentication *auth = [MTLJSONAdapter modelOfClass:Authentication.class fromJSONDictionary:dict error:&error];
-        if (error == nil)
-        {
-            success(auth);
-        }
-        else {
-            failure(error);
-        }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        failure(error);
-    }];
+
+    [self httpPostForAuthentication:resetPasswordUrl params:params success:success failure:failure];
+
 }
 
 - (void)getSessionSuccess:(void (^)(OKSession *session))success

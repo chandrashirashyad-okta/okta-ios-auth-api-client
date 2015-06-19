@@ -7,6 +7,7 @@
 //
 
 #import "OktaChangePasswordViewController.h"
+#import "OktaViewController.h"
 
 @interface OktaChangePasswordViewController ()
 
@@ -29,19 +30,20 @@
         [alert show];
         return;
     }
-//    AuthenticationClient *authClient = [[AuthenticationClient alloc] init];
-//    [authClient changeExpiredPassword:self.auth.stateToken
-//                          oldPassword:self.oldPassword.text
-//                        nuevoPassword:self.nuevoPassword.text
-//                              nextUrl:self.auth.next.href
-//                              success:^(Authentication *auth) {
-//                                  self.auth = auth;
-//                                  [self.delegate changePasswordComplete:self authenticationObject:auth];
-//                                  [self dismissViewControllerAnimated:YES completion:nil];
-//                              }
-//                              failure:^(NSError *error) {
-//                                  self.APIResults.text = [error description];
-//                              }];
+    OktaViewController * o = (OktaViewController *) sender;
+    AuthAPIClient *doAuth = [[AuthAPIClient alloc] initWithOrgUrl:@"https://shirashyad.oktapreview.com"];
+    [doAuth changeExpiredPassword:self.auth.stateToken
+                      oldPassword:self.oldPassword.text
+                    nuevoPassword:self.nuevoPassword.text
+                          nextUrl:self.auth.next.href
+                          success:^(Authentication *auth) {
+                              self.auth = auth;
+                              [self.delegate changePasswordComplete:self authenticationObject:auth];
+                              [self dismissViewControllerAnimated:YES completion:nil];
+                          }
+                          failure:^(NSError *error) {
+                              self.APIResults.text = [error description];
+                          }];
 }
 
 - (IBAction)changePasswordCancelClicked:(id)sender {

@@ -15,7 +15,7 @@
 {
     // Override point for customization after application launch.
     AuthAPIClient *ac = [[AuthAPIClient alloc] init];
-    [ac authenticate];
+    [ac authenticateTest];
     return YES;
 }
 							
